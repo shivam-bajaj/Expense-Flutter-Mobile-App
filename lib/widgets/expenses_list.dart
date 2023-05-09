@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:xpenses/widgets/expense_item.dart';
 import '../models/expenses.dart';
 import 'package:intl/intl.dart';
 
@@ -14,49 +15,51 @@ class ExpensesList extends StatelessWidget {
       child: ListView.builder(
         itemCount: expenses.length,
         itemBuilder: (ctx, index) {
-          return Card(
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-            elevation: 5,
-            child: Row(
-              children: [
-                Container(
-                  margin:
-                      const EdgeInsets.symmetric(vertical: 12, horizontal: 17),
-                  padding: const EdgeInsets.all(10),
-                  decoration: BoxDecoration(
-                      border: Border.all(width: 3, color: Colors.purpleAccent)),
-                  child: Text(
-                    '₹${expenses[index].amount}', //String interpolation
-                    style: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20,
-                      color: Colors.deepPurpleAccent,
-                    ),
-                  ),
-                ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      expenses[index].title,
-                      style: const TextStyle(
-                        fontSize: 17,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    Text(
-                      DateFormat.yMMMd().format(expenses[index].date),
-                      style: const TextStyle(
-                          color: Colors.grey, fontWeight: FontWeight.bold),
-                    )
-                  ],
-                )
-              ],
-            ),
-          );
+          return ExpenseItem(expenses[index]);
         },
       ),
     );
   }
 }
+
+// Card(
+//             shape:
+//                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+//             elevation: 5,
+//             child: Row(
+//               children: [
+//                 Container(
+//                   margin:
+//                       const EdgeInsets.symmetric(vertical: 12, horizontal: 17),
+//                   padding: const EdgeInsets.all(10),
+//                   decoration: BoxDecoration(
+//                       border: Border.all(width: 3, color: Colors.purpleAccent)),
+//                   child: Text(
+//                     '₹${expenses[index].amount}', //String interpolation
+//                     style: const TextStyle(
+//                       fontWeight: FontWeight.bold,
+//                       fontSize: 20,
+//                       color: Colors.deepPurpleAccent,
+//                     ),
+//                   ),
+//                 ),
+//                 Column(
+//                   crossAxisAlignment: CrossAxisAlignment.start,
+//                   children: [
+//                     Text(
+//                       expenses[index].title,
+//                       style: const TextStyle(
+//                         fontSize: 17,
+//                         fontWeight: FontWeight.bold,
+//                       ),
+//                     ),
+//                     Text(
+//                       DateFormat.yMMMd().format(expenses[index].date),
+//                       style: const TextStyle(
+//                           color: Colors.grey, fontWeight: FontWeight.bold),
+//                     )
+//                   ],
+//                 )
+//               ],
+//             ),
+//           )

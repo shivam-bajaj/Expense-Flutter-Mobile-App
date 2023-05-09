@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:xpenses/widgets/new_transaction.dart';
+import 'package:xpenses/widgets/new_expense.dart';
 import 'package:xpenses/widgets/expenses_list.dart';
 
 import 'models/expenses.dart';
@@ -13,6 +13,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Xpenses',
+      theme: ThemeData(useMaterial3: true),
       home: HomePage(),
     );
   }
@@ -48,22 +49,22 @@ class _HomePageState extends State<HomePage> {
         category: Category.food),
   ];
 
-  void _addNewTransaction(String title, int amount) {
-    final newTx = Expense(
-        id: DateTime.now().toString(),
-        title: title,
-        amount: amount,
-        date: DateTime.now());
-    setState(() {
-      _userExpenses.add(newTx);
-    });
-  }
+  // void _addNewTransaction(String title, int amount) {
+  //   final newTx = Expense(
+  //       title: title,
+  //       amount: amount,
+  //       date: DateTime.now());
+  //   setState(() {
+  //     _userExpenses.add(newTx);
+  //   });
+  // }
 
-  void _startAddNewTransaction(BuildContext ctx) {
+  void _openAddExpenseOverlay() {
     showModalBottomSheet(
-        context: ctx,
-        builder: ((_) {
-          return NewTransaction(_addNewTransaction);
+        context: context,
+        builder: ((ctx) {
+          return NewExpense();
+          //return NewExpense(_addNewTransaction);
         }));
   }
 
@@ -81,34 +82,32 @@ class _HomePageState extends State<HomePage> {
         actions: [
           IconButton(
               icon: const Icon(Icons.add_outlined),
-              onPressed: (() => _startAddNewTransaction(context))),
+              onPressed: _openAddExpenseOverlay),
         ],
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.miniEndFloat,
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.add),
-        onPressed: (() => _startAddNewTransaction(context)),
+        onPressed: _openAddExpenseOverlay,
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            Container(
-                width: double.infinity,
-                height: 100,
-                padding: new EdgeInsets.only(bottom: 10),
-                child: Card(
-                  child: Text("Chart"),
-                  color: Colors.blue,
-                  elevation: 7,
-                )),
-            Expanded(
-              child: ExpensesList(
-                expenses: _userExpenses,
-              ),
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: <Widget>[
+          Container(
+              width: double.infinity,
+              height: 100,
+              padding: new EdgeInsets.only(bottom: 10),
+              child: Card(
+                child: Text("Chart"),
+                color: Colors.blue,
+                elevation: 7,
+              )),
+          Expanded(
+            child: ExpensesList(
+              expenses: _userExpenses,
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
