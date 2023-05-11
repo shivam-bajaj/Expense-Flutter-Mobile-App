@@ -22,7 +22,6 @@ class ExpenseItem extends StatelessWidget {
                 const Spacer(),
                 Row(
                   children: [
-                    // checkout value of expense.category in text widget
                     Icon(categoryIcons[expense.category]),
                     const SizedBox(width: 7),
                     Text(

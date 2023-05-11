@@ -49,22 +49,19 @@ class _HomePageState extends State<HomePage> {
         category: Category.food),
   ];
 
-  // void _addNewTransaction(String title, int amount) {
-  //   final newTx = Expense(
-  //       title: title,
-  //       amount: amount,
-  //       date: DateTime.now());
-  //   setState(() {
-  //     _userExpenses.add(newTx);
-  //   });
-  // }
+  void _addNewExpense(Expense expense) {
+    setState(() {
+      _userExpenses.add(expense);
+    });
+  }
 
   void _openAddExpenseOverlay() {
     showModalBottomSheet(
         context: context,
         builder: ((ctx) {
-          return NewExpense();
-          //return NewExpense(_addNewTransaction);
+          return NewExpense(
+            addExpense: _addNewExpense,
+          );
         }));
   }
 
