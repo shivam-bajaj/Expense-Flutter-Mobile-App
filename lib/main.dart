@@ -57,6 +57,7 @@ class _HomePageState extends State<HomePage> {
 
   void _openAddExpenseOverlay() {
     showModalBottomSheet(
+        isScrollControlled: true,
         context: context,
         builder: ((ctx) {
           return NewExpense(

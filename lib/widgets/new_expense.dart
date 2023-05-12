@@ -66,15 +66,15 @@ class _NewExpenseState extends State<NewExpense> {
         amount: enteredAmount,
         date: _selectedDate!,
         category: _selectedCategory));
-    Navigator.of(context).pop();
+    Navigator.pop(context);
   }
 
   @override
   Widget build(BuildContext context) {
     return Card(
       elevation: 3,
-      child: Container(
-        padding: EdgeInsets.all(10),
+      child: Padding(
+        padding: EdgeInsets.fromLTRB(16, 25, 16, 16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
