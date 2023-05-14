@@ -71,79 +71,76 @@ class _NewExpenseState extends State<NewExpense> {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 3,
-      child: Padding(
-        padding: EdgeInsets.fromLTRB(16, 25, 16, 16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.end,
-          children: [
-            TextField(
-              decoration: InputDecoration(labelText: 'Title'),
-              maxLength: 40,
-              controller: _titleController,
-              onSubmitted: (_) => submitExpense(),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Expanded(
-                  child: TextField(
-                    decoration:
-                        InputDecoration(label: Text('Amount'), prefixText: '₹'),
-                    controller: _amountController,
-                    keyboardType: TextInputType.number,
-                    onSubmitted: (_) => submitExpense(),
-                  ),
+    return Padding(
+      padding: EdgeInsets.fromLTRB(16, 25, 16, 16),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.end,
+        children: [
+          TextField(
+            decoration: InputDecoration(labelText: 'Title'),
+            maxLength: 40,
+            controller: _titleController,
+            onSubmitted: (_) => submitExpense(),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Expanded(
+                child: TextField(
+                  decoration:
+                      InputDecoration(label: Text('Amount'), prefixText: '₹'),
+                  controller: _amountController,
+                  keyboardType: TextInputType.number,
+                  onSubmitted: (_) => submitExpense(),
                 ),
-                const SizedBox(
-                  width: 15,
-                ),
-                Row(
-                  children: [
-                    Text(_selectedDate == null
-                        ? ' No Date Selected'
-                        : dateFormatter.format(_selectedDate!)),
-                    IconButton(
-                      icon: Icon(Icons.calendar_month),
-                      onPressed: _datePicker,
-                    )
-                  ],
-                )
-              ],
-            ),
-            const SizedBox(
-              height: 16,
-            ),
-            Row(
-              children: [
-                DropdownButton(
-                  value: _selectedCategory,
-                  items: Category.values
-                      .map((category) => DropdownMenuItem(
-                            value: category,
-                            child: Text(category.name.toUpperCase()),
-                          ))
-                      .toList(),
-                  onChanged: (value) {
-                    setState(() {
-                      _selectedCategory = value!;
-                    });
-                  },
-                ),
-                const Spacer(),
-                TextButton(
-                    child: Text('Cancel'),
-                    onPressed: () => Navigator.pop(context)),
-                ElevatedButton(
-                  child: Text("Add Transaction"),
-                  onPressed: submitExpense,
-                ),
-              ],
-            )
-          ],
-        ),
+              ),
+              const SizedBox(
+                width: 15,
+              ),
+              Row(
+                children: [
+                  Text(_selectedDate == null
+                      ? ' No Date Selected'
+                      : dateFormatter.format(_selectedDate!)),
+                  IconButton(
+                    icon: Icon(Icons.calendar_month),
+                    onPressed: _datePicker,
+                  )
+                ],
+              )
+            ],
+          ),
+          const SizedBox(
+            height: 16,
+          ),
+          Row(
+            children: [
+              DropdownButton(
+                value: _selectedCategory,
+                items: Category.values
+                    .map((category) => DropdownMenuItem(
+                          value: category,
+                          child: Text(category.name.toUpperCase()),
+                        ))
+                    .toList(),
+                onChanged: (value) {
+                  setState(() {
+                    _selectedCategory = value!;
+                  });
+                },
+              ),
+              const Spacer(),
+              TextButton(
+                  child: Text('Cancel'),
+                  onPressed: () => Navigator.pop(context)),
+              ElevatedButton(
+                child: Text("Add Transaction"),
+                onPressed: submitExpense,
+              ),
+            ],
+          )
+        ],
       ),
     );
   }
