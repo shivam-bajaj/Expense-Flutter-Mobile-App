@@ -13,25 +13,29 @@ class ExpenseItem extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              expense.title,
-              style: Theme.of(context).textTheme.titleLarge,
-            ),
-            SizedBox(
+            Row(children: [
+              Text(
+                expense.title,
+                style: Theme.of(context).textTheme.titleLarge,
+              ),
+              const Spacer(),
+              Row(
+                children: [
+                  Icon(categoryIcons[expense.category]),
+                  const SizedBox(width: 5),
+                  Text(expense.category.name.toUpperCase()),
+                ],
+              )
+            ]),
+            const SizedBox(
               height: 4,
             ),
             Row(
               children: [
                 Text('₹${expense.amount}'), //String interpolation
                 const Spacer(),
-                Row(
-                  children: [
-                    Icon(categoryIcons[expense.category]),
-                    const SizedBox(width: 7),
-                    Text(
-                      expense.formattedDate,
-                    )
-                  ],
+                Text(
+                  expense.formattedDate,
                 )
               ],
             )

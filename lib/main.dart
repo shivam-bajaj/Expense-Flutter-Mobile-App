@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:xpenses/widgets/chart/chart.dart';
 import 'package:xpenses/widgets/new_expense.dart';
 import 'package:xpenses/widgets/expenses_list.dart';
 
@@ -146,11 +147,7 @@ class _HomePageState extends State<HomePage> {
       body: Column(
         // crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
-          Container(
-              width: double.infinity,
-              height: 100,
-              padding: const EdgeInsets.only(bottom: 10),
-              child: Text("Chart")),
+          Chart(expenses: _userExpenses),
           Expanded(
             child: mainContent,
           ),
